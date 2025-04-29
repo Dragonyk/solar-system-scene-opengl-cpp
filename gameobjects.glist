@@ -1,0 +1,107 @@
+#comment
+
+#bola
+go 100
+p 0.0 0.35 0.0
+r 0.0 0.0 0.0
+s 1.0 1.0 1.0
+anim catmull
+r_axis 0.0 0.1 0.0
+ap -1 -10 0
+ap -1 0 0
+ap 0 0 0
+ap 1 0 0
+ap 1 -10 0
+end_anim
+end_go
+
+#bola
+go 100
+p 0.0 0.35 0.0
+r 0.0 0.0 0.0
+s 0.8 0.8 0.8
+anim catmull
+r_axis 0.0 0.4 0.0
+ap -2 -10 -6
+ap -2 0 -6
+ap 0 2 0
+ap 2 0 6
+ap 2 -10 6
+end_anim
+end_go
+
+#bola
+go 100
+p 0.0 5.0 -8.0
+r 0.0 0.0 0.0
+s 2.0 2.0 2.0
+anim none
+r_axis 0.15 0.23 0.035
+end_anim
+end_go
+
+#bola
+go 100
+p 0.0 10.0 -5.0
+r 0.0 0.0 0.0
+s 2.0 2.0 2.0
+anim none
+r_axis 0.0 0.005 0.0
+end_anim
+end_go
+
+#bola
+go 100
+p 0.0 10.0 5.0
+r 0.0 0.0 0.0
+s 2.0 2.0 2.0
+anim none
+r_axis 0.0 0.01 0.0
+end_anim
+end_go
+
+#space_sun
+go 104
+lcolor 1.0 1.0 0.95
+latten 0.00075 0.0045 1.0
+p 0.0 0.0 -2.0
+r 0.0 0.0 0.0
+s 1.0 1.0 1.0
+anim none
+r_axis 0.0 0.01 0.0
+end_anim
+end_go
+
+#space_sun
+go 104
+lcolor 0.0 0.0 0.95
+latten 0.00075 0.0045 1.0
+p 0.0 1.0 10.0
+r 0.0 0.0 0.0
+s 1.0 1.0 1.0
+anim none
+r_axis 0.0 0.01 0.0
+end_anim
+end_go
+
+#space_sun
+go 104
+lcolor 1.0 0.0 0.0
+latten 0.00075 0.0045 1.0
+p -8.0 5.0 -2.0
+r 0.0 0.0 0.0
+s 1.0 1.0 1.0
+anim none
+r_axis 0.0 0.01 0.0
+end_anim
+end_go
+
+#space_argus
+go 103
+p 8.0 8.0 8.0
+r 0.0 0.0 0.0
+s 5.0 5.0 5.0
+anim none
+#r_axis 0.0 0.01 0.0
+end_anim
+end_go

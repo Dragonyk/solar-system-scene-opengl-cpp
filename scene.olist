@@ -1,0 +1,19 @@
+#comment
+
+cam_pos 0.0 2.0 8.0
+
+obj objs/bola.obj
+id 100
+end_obj
+
+#obj objs/plane.obj
+#id 102
+#end_obj
+
+obj objs/space_argus.obj
+id 103
+end_obj
+
+obj objs/space_sun.obj
+id 104
+end_obj
