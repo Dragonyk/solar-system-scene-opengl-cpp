@@ -1,0 +1,79 @@
+#version 330 core
+out vec4 FragColor;
+
+in vec3 FragPos;  
+in vec3 Normal;  
+
+in vec2 TexCoord;
+uniform sampler2D texture1;
+
+uniform vec3 objectColor = vec3(0.0f, 0.0f, 0.0f);
+uniform vec3 lightColor;
+uniform vec3 viewPos;
+
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+}; 
+
+struct Light {
+    vec3 position;
+  
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+	
+	float constant;
+	float linear;
+	float quadratic;	
+};
+#define NR_POINT_LIGHTS 100
+uniform Light lights[NR_POINT_LIGHTS];
+
+uniform Material material;
+
+//0 ... 3
+uniform float illumi = 1.0f;
+
+uniform int size_lights;
+
+vec3 CalcPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir);
+
+void main(){
+	vec3 norm = normalize(Normal);
+	vec3 viewDir = normalize(viewPos - FragPos);
+	vec3 result = vec3(0.0f);//CalcPointLight(lights[0], norm, FragPos, viewDir);
+	for(int i = 0; i < size_lights; i++)
+        result += CalcPointLight(lights[i], norm, FragPos, viewDir); 
+	
+
+	vec4 texel = texture(texture1, TexCoord);
+	texel = clamp(texel+vec4(objectColor, 1.0f),0.0f, 1.0f);
+	FragColor = vec4(result, 1.0)*texel;
+}  
+
+vec3 CalcPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
+{
+    vec3 lightDir = normalize(light.position - fragPos);
+    // diffuse shading
+    float diff = max(dot(normal, lightDir), 0.0);
+    // specular shading
+    vec3 reflectDir = reflect(-lightDir, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    // attenuation
+    float distance    = length(light.position - fragPos);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
+    // combine results
+	
+    vec3 ambient  = light.ambient  * material.ambient;
+    vec3 diffuse  = light.diffuse  * (diff * material.diffuse);
+    vec3 specular = light.specular * (spec * material.specular);
+	
+    ambient  *= attenuation;
+    diffuse  *= attenuation;
+    specular *= attenuation;
+	//*(illumi*4.0f)
+    return (ambient + diffuse + specular);
+} 
